@@ -63,6 +63,7 @@ class DoublyList:
                 
                 
 
+
 #task2(4)
     def n_insert(self, newel, idx):
         hg = self.head
