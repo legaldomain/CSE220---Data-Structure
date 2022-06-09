@@ -17,6 +17,7 @@ class stack:
         
         return self.stack_list[self.pointer_idx]
 
+
     
     def pop(self):
         value=self.stack_list [self.pointer_idx]
