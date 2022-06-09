@@ -57,6 +57,7 @@ print(powerN(3, 3))
 
 
 
+
 #TASK 2 (A)
 
 def dectobin(n):
