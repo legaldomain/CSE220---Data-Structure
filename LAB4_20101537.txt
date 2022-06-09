@@ -1,0 +1,214 @@
+#LAB 4
+#SADAF M.ANIS
+#ID : 20101537
+
+
+
+class stack:
+    stack_list = []
+    pointer_idx = -1
+
+    def push(self, ele, idx):
+        temp1 = [ele, idx]
+        self.stack_list.append(temp1)
+        self.pointer_idx += 1
+
+    def peek(self):
+        
+        return self.stack_list[self.pointer_idx]
+
+    
+    def pop(self):
+        value=self.stack_list [self.pointer_idx]
+        temp_list = []
+        
+        
+        for j in range (0,self.pointer_idx):
+            temp_list.append(self.stack_list[j])
+        self.stack_list = temp_list
+        
+        self.pointer_idx -= 1
+        return (value)
+
+    
+    def empty_list(self):
+        if len(self.stack_list) == 0:
+            return True
+        else:
+            return False
+
+
+def bracket_check(start, close):
+    if start=="(" and close == ")":
+        return True
+    elif start=="{"and close == "}":
+        return True
+    elif start== "["and close == "]":
+        return True
+    
+    else:
+        return False
+
+
+def exp_check(exp):
+    first_bracket = ["(", "{", "["]
+    last_bracket = [")", "}", "]"]
+    counter = 0
+    
+    
+    
+    for k in exp:
+        if k in first_bracket:
+            obj.push(k, counter)
+        elif k in last_bracket:
+            if obj.empty_list():
+                return f"this expression is not CORRECT.\n error at character - {counter + 1}.‘{expression[counter]}‘not opened"
+            else:
+                temp_list = obj.peek()
+                if bracket_check(temp_list[0], k):
+                    obj.pop()
+                else:
+                    return f"this expression is Not correct.\n error at the character{temp_list[1] + 1}.‘{temp_list[0]}‘not closed properly"
+
+
+        counter += 1
+
+    if obj.empty_list():
+        return "following expression is Correct."
+
+    else:
+        temp_list = obj.peek()
+        return f"this expression is not correct.\n Error at the character {temp_list[1] + 1}. ‘{temp_list[0]}‘not closed."
+
+
+exp_LIST = ["1+2*(3/4)", "1+2*[3*3+{4–5(6(7/8/9)+10)–11+(12*8)]+14", "1+2*[3*3+{4–5(6(7/8/9)+10)}–11+(12*8)/{13+13}]+14",
+           "1+2]*[3*3+{4–5(6(7/8/9)+10)–11+(12*8)]+14"]
+
+#============================================
+ck = 1
+for o in range(len(exp_LIST)):
+    obj = stack()
+    obj.stack_listt = []
+    
+    
+    print(f"output:{ck}")
+    print(exp_LIST[o])
+    print(exp_check(exp_LIST[o]))
+    
+    print("----------------------------")
+    ck += 1
+    print("----------------------------")
+
+
+
+
+
+
+
+
+
+
+#TASK 2 
+
+
+#linked list pattern using
+
+
+
+class Node:
+    
+    def __init__(self, element, idx):
+        self.list = [element, idx]
+        self.next = None
+        
+class stack:
+    
+    head = None
+    def push(self, element, idx):
+        if self.head == None:
+            self.head = Node(element, idx)
+        else:
+            new = Node(element, idx)
+            new.next = self.head
+            self.head = new
+
+    def peek(self):
+        return self.head.list
+
+    def pop(self):
+        
+        if self.head!=None:
+            self.head = self.head.next
+
+    def empty(self):
+        if self.head == None:
+            return True
+        else:
+            return False
+
+
+def bracket_check(start, end):
+    if start== "(" and end== ")":
+        return True
+    elif start== "{" and end== "}":
+        return True
+    elif start== "[" and end=="]":
+        return True
+    else:
+        return False
+
+
+def expression_check(exp):
+    first_bracket = ["(", "{", "["]
+    second_bracket = [")", "}", "]"]
+    index = 0
+    
+    
+    for i in exp:
+        if i in first_bracket:
+            obj.push(i, index)
+        elif i in second_bracket:
+            if obj.empty():
+                return f"this expression is not Correct\n Error at character{index + 1}.‘{exp[index]}‘not opened."
+
+            else:
+                temp_lst = obj.peek()
+                if bracket_check(temp_lst[0], i):
+                    obj.pop()
+                else:
+                    temp_lst = obj.peek()
+                    return f"this expression is not correct\n Error at character {temp_lst[1] + 1}.‘{temp_lst[0]}‘- not closed."
+        index += 1
+
+    if obj.empty():
+        return "This expression is correct"
+
+    else:
+        temp_lst = obj.peek()
+        return f"This expression is NOT correct.\nError at character # {temp_lst[1] + 1}. ‘{temp_lst[0]}‘- not closed."
+
+
+exp_list = ["1+2*(3/4)", "1+2*[3*3+{4–5(6(7/8/9)+10)–11+(12*8)]+14", "1+2*[3*3+{4–5(6(7/8/9)+10)}–11+(12*8)/{13+13}]+14",
+           "1+2]*[3*3+{4–5(6(7/8/9)+10)–11+(12*8)]+14"]
+ck = 1
+for count in range(len(exp_list)):
+    obj = stack()
+    
+    obj.stack_list = []
+    
+    
+    print(f"Output:{ck}")
+    print(exp_list[count])
+    print(expression_check(exp_list[count]))
+    print("----------------------------")
+    
+    
+    ck += 1
+    print("----------------------------")
+        
+        
+            
+            
+            
+        
+        

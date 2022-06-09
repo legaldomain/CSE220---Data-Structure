@@ -1,0 +1,279 @@
+#Sadaf M. Anis
+#20101537
+
+#TASK 1 (A)
+
+def factorialN(n):
+    if n == 0 or n ==1 :
+        return 1
+    return n* factorialN (n-1)
+
+temp = 7
+print(factorialN(temp))
+
+
+#TASK 1 (B)
+
+def fib_s(n):
+    if n < 2:
+        return n
+    return fib_s(n-1) + fib_s(n-2)
+
+print(fib_s(10))
+
+
+
+#TASK 1 (C)
+
+def print_arr(a,select = 0):
+    if select == len(a):
+        return
+    print(a[select])
+    return print_arr(a,select = select + 1)
+
+a = [10,22,33,50,66,85]
+print_arr(a)
+
+
+
+
+#TASK 1 (D)
+
+def powerN(base, n):
+    if n == 0:
+        return 1
+    temp = powerN(base, n//2)
+    if n % 2 == 0:
+        return temp *temp
+    else:
+        return temp*temp*base
+
+
+print(powerN(3, 1))
+print(powerN(3, 2))
+print(powerN(3, 3))
+
+
+
+
+
+#TASK 2 (A)
+
+def dectobin(n):
+    if 1<= n:
+        dectobin(n//2)
+        print(n%2,end = "")
+        
+n = 25
+dectobin(n)
+
+
+
+
+
+#TASK 2 (B)
+
+class Node :
+    def __init__(self,el,nxt):
+        
+        self.element = el
+        self.next = nxt
+        
+def add(n):
+        
+    if n is None:
+        return 0
+    else:
+        return n.element + add(n.next)
+        
+       
+    print(n.element)
+        
+node6=Node(5,None)
+
+node5=Node(4,node6)
+
+node4=Node(3,node5)
+
+node3=Node(2,node4)
+
+node2=Node(1,node3)
+
+node1=Node(0,node2)
+
+print("Addition: ",add(node1))
+
+
+
+#TASK 2(C)
+
+class Node:
+    def __init__(self,el,nxt):
+        self.element = el
+        self.next = nxt
+        
+def addition(n):
+        
+    if n is None:
+        return 0
+    else:
+        return n.element + addition(n.next)
+        
+def printreverse(n):
+    if n is None:
+        return
+    printreverse(n.next)
+    print(n.element)
+        
+        
+node6=Node(5,None)
+
+node5=Node(4,node6)
+
+node4=Node(3,node5)
+
+node3=Node(2,node4)
+
+node2=Node(1,node3)
+
+node1=Node(0,node2)
+
+print("Addition : ",addition(node1))
+
+print("reverse print:")
+
+printreverse(node1)     
+
+
+
+
+#TASK 3
+
+def hocBulider(height):
+    
+    if height >1:
+        return 5 + hocBulider(height-1)
+    
+    
+    elif height==0:
+        return "can't build a house"
+    elif height<0:
+        return None
+    else:
+        return 8
+    
+    
+print (hocBulider(0))
+
+print(hocBuilder(4))
+
+
+
+       
+
+
+#TASK 4 (A)
+
+def printrow(a):
+    if a == 0:
+        return 
+    else:
+        printrow(a-1)
+        print(a, end="  ")
+        
+def pattern(n):
+    
+    if n == 0:
+        return 
+    else:
+        pattern (n-1)
+        printrow(n)
+        print()
+        
+pattern(7)
+
+
+
+
+
+
+#TASK 4 (b)
+
+def rowprint(a):
+    
+    if a == 0:
+        return
+    else:
+        printNumRow(a - 1)
+        print(a,end="")
+        
+def space(j,k):
+    if k==j:
+        return
+    elif k==0:
+        return
+    else:
+        print(" ",end="")
+        space(j,k-1)
+def pattern(m,n):
+    if m == 0:
+        return
+    else:
+        pattern(m-1,n)
+        space(m,n)
+        rowprint(m)
+        print()
+
+
+pattern(4,4)
+
+
+
+
+
+
+#TASK 5
+
+
+
+class FinalQ: 
+    
+    def print(self,array,idx): 
+        
+        if(idx<len(array)): 
+            
+            profit = self.calcProfit(array[idx])
+            print("investment:",array[idx],";","Profit:",profit)
+            
+            self.print(array,idx+1)
+            
+  
+    def calcProfit(self,investment): 
+        if investment == 25000:
+            return 0
+        
+        
+        elif (25000< investment and 25999 >= investment):
+            return (4.5 + self.calcProfit(investment - 100))
+        
+        
+        elif (investment >= 26000 and investment <= 100000):
+            return (45 + self.calcProfit(investment - 1000))
+        
+        
+        elif (investment > 100000 and investment <= 10999):
+            return (8+self.calcProfit(investment - 100))
+        
+        
+        elif (investment > 10999):
+            return (80 + self.calcProfit(investment - 1000))
+        
+        
+
+  
+#Tester
+array=[25000,100000,250000,350000] 
+
+f = FinalQ() 
+
+f.print(array,0)

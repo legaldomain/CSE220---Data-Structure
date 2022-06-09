@@ -1,0 +1,181 @@
+
+#SADAF M. ANIS
+#20101537
+
+
+#task 1
+class Node:
+    def __init__(self, val, prev,next): 
+        self.prev = prev
+        self.value = val 
+        self.next = next 
+        
+#task2
+class DoublyList:
+    def __init__(self,a=None):
+        if a is None:
+            self.head = None
+            print("empty DL")
+        elif isinstance(a,list):
+            head = Node(None,None,None)
+            self.head = head
+            tail = self.head
+            
+            
+            for i in a:
+                nNode = Node(i,None,None)
+                if self.head == None:
+                    self.head.next = nNode
+                    tail = nNode
+                else:
+                    tail.next = nNode
+                    nNode.prev = tail
+                    tail = nNode
+                tail.next = head
+                head.prev = tail     
+#task2(2)
+    def showList(self):
+        hg = self.head
+        ng = hg.next 
+        while ng != hg:
+            
+            print(ng.value)
+            ng = ng.next
+#task2(3)          
+    def insert(self, newel):
+        hg = self.head 
+        ng = hg.next
+        
+        while ng != hg:
+            if ng.value == newel:
+                print ("key already exist")
+                break
+            ng = ng.next
+            
+        if ng.value != newel:
+            
+            
+            
+            nNode = Node(newel, None, None)
+            ng.next = nNode
+            nNode.prev = ng 
+            nNode.next = hg
+                
+                
+
+#task2(4)
+    def n_insert(self, newel, idx):
+        hg = self.head
+        ng = hg.next 
+        count = 0
+        while ng != hg: 
+            count = count +1 
+            ng = ng.next 
+        if idx<0 or idx>=count:
+            print("Wrong Index")
+        if idx == 0:
+            ng = nNode
+            
+        for i in range (idx-1): 
+            ng= ng.next
+              
+                
+        sg = ng.next  
+        
+        
+        
+        
+        nNode = Node(newel, None, None)
+        ng.next = nNode
+        nNode.prev = ng
+        nNode.next = sg 
+        sg.prev = nNode
+        
+#task2 (5)      
+    def remove(self, index):
+        hg = self.head
+        ng = hg.next
+        size = 0 
+        
+        
+        while ng!= hg:
+            size = size+ 1 
+            ng = ng.next 
+            
+        if index < 0 or index >= size: 
+            print("wrrong index")
+        if index == 0: 
+            self.head = nNode 
+        else:
+            ng = self.head.next 
+            
+            
+        for i in range (index -1):
+            ng = ng.next 
+        
+        temp= ng.next.next 
+        
+        removed_node = ng.next
+        
+        ng.next = temp
+        
+        temp.prev = ng
+        
+        
+        
+        removed_node.next = None 
+        removed_node.prev = None 
+        removed_node.value = None 
+#task2 (6)       
+    def removekey(self,key):
+        hg = self.head
+        ng = hg.next
+        temp = ng.next
+        prev = ng.prev
+        
+        
+        
+        while ng!= hg:
+            if ng.value == key:
+                if ng == hg.next:
+                    
+                    hg.next = temp 
+                    temp.prev = hg
+                    ng.next = None 
+                    ng.prev = None 
+                    ng.value = None 
+                else:
+                    
+                    
+                    
+                    prev.next = temp
+                    temp.prev = prev 
+                    ng.next = None 
+                    ng.prev = None 
+                    ng.value = None 
+                if ng.next == hg:
+                    prev.next = hg 
+                    hg.prev = prev
+                    ng.next = None 
+                    ng.prev = None 
+                    ng.value = None 
+            prev = ng
+            ng = ng.next 
+            temp = ng.next 
+                
+#TESTER CLASS
+      
+x = [1,2,3,4]
+dlist = DoublyList(x)
+dlist.showList()  
+dlist.insert(6)
+dlist.showList()
+dlist.n_insert(10,2)
+dlist.showList()
+dlist.remove(6)
+dlist.showList()
+dlist.removekey(1)
+dlist.showList()
+
+        
+        

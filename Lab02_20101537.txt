@@ -1,0 +1,405 @@
+#Name : SADAF M. ANIS (20101537)
+
+class Node:
+    def __init__(self,ele,n):
+        self.ele = ele
+        self.next = n
+        
+
+class MyList:
+    def __init__(self,a):
+        self.a = a
+        
+        self.head = None
+        
+        tail = None
+        
+        for i in a:
+            n = Node(i, None)
+            if self.head == None:
+                self.head = n
+                tail = n
+            else:
+                tail.next = n
+                
+                tail = n
+   
+
+#######TASK 2#######
+
+class MyList:
+    def __init__(self,a):
+        self.a = a
+        
+        self.head = None
+        
+        tail = None
+        
+        for i in a:
+            n = Node(i, None)
+            if self.head == None:
+                self.head = n
+                tail = n
+            else:
+                tail.next = n
+                
+                tail = n
+                
+    def showList(self):
+        random = self.head
+        if random == None:
+            print("Empty List!")
+            
+        else:
+            while random!= None:
+                if random.next!= None:
+                    print(random.ele,end = ",")
+                else:
+                    print(random.ele)
+                    
+                random = random.next    
+                
+                
+    def isEmpty(self):
+        if self.head != None:
+            print("True")
+        
+        else:
+            print("fAlse")
+            
+    
+    def clear(self):
+        if self.head  !=  None:
+            self.head = None
+            
+    def insert(self, newElement, index=None):
+        if index == None:
+            temp = self.head
+            checking = True
+            while temp != None:
+                if temp.ele == newElement:
+                    print(f"this key: {newElement} already exists.")
+                    checking = False
+                    break
+                temp = temp.next
+
+            if checking:
+                temp_1 = self.head
+                new_node = Node(newElement, None)
+                while temp_1.next != None:
+                    temp_1 = temp_1.next
+                temp_1.next = new_node
+        
+        
+        #2ND PART TASK 6
+        
+        else:
+            if self.head !=None:
+                temp=self.head
+                count_ele=0
+                checking=True
+               
+            
+                while temp != None:
+                    
+                    if temp.ele == newElement:
+                        print(f"this key: {newElement} already exists.")
+                        
+                        checking = False
+                    temp = temp.next
+                    count_ele += 1
+
+                
+                
+                if checking:
+                    
+                    if index < 0 or index > count_ele:
+                        
+                        raise Exception("invalid index! given")
+                    
+                    
+                    new_node = Node(newElement, None)
+                    if index == 0:
+                        new_node.next = self.head
+                        self.head = new_node
+                    else:
+                        temp_1 = self.head
+                        for i in range(0, index - 1):
+                            temp_1 = temp_1.next
+                        
+                        
+                        rand = temp_1
+                        new_node.next = rand.next
+                        rand.next = new_node    
+                        
+    def length(self):
+        reck = 0
+        n = self.head
+        while (n is not None):
+            reck = reck + 1
+            n = n.next
+        return reck
+
+    def atnode(self, index):
+        if index < 0 and index >= self.length():
+            return None
+        x = self.head
+        i = 0
+        while (x is not None):
+            if i == index:
+                return x
+            x = x.next
+            i = i + 1                        
+    
+                
+                
+    def remove(self, deletekey):
+        if self.head != None:
+            temp = self.head
+            idx = 0
+            toremove = False
+            while temp != None:
+                if temp.ele == deletekey and idx == 0:
+                    removed_node = self.head
+                    self.head = self.head.next
+                    toremove = True
+                elif temp.ele == deletekey and idx != 0:
+                    rand = self.atnode(idx - 1)
+                    removed_node = rand.next
+                    rand.next = removed_node.next
+                    toremove = True
+                idx += 1
+                temp = temp.next
+            else:
+                toremove == False
+                print(f"following key: {deletekey} do not exists") 
+                
+                
+                
+######----- TASK 3 (ADVANCE OPERATIONS) ---########
+
+    def to_find_even(self):
+        basic_even = False
+        st1 = self.head
+        st2 = st1  
+        
+        
+        while st1 != None:
+            if st1.ele % 2 == 0 and basic_even == False:
+                basic_even = True
+                st2 = st1
+                self.head = st2
+
+            elif st1.ele % 2 == 0:
+                st2.next = st1
+                st2 = st1
+
+            st1 = st1.next
+            
+        st2.next = None
+        
+        return self
+    
+    
+    def find(self,element):
+        temp = self.head
+        result = False
+        while temp!= None:
+            if temp.ele == element:
+                result = True
+            temp = temp.next
+        return result   
+    
+    
+    def reverse_p_list(self):
+        n_head = None
+        temp = self.head
+        while temp != None:
+            next_node = temp.next
+            temp.next = n_head
+            n_head = temp
+            temp = next_node
+        self.head = n_head
+        
+    
+    def sort_function(self):
+        tail = None
+        chead = self.head
+        while tail != chead.next:
+            st1 = self.head
+            while st1.next != tail:
+                st2 = st1.next
+                if st1.ele > st2.ele:
+                    temp_var = st1.ele
+                    st1.ele = st2.ele
+                    st2.ele = temp_var
+                    
+                st1 = st1.next
+                
+            tail = st1    
+            
+            
+    def total_sum(self):
+        n = self.head
+        sum_total = 0
+        while n is not None:
+            sum_total += n.ele
+            n = n.next
+            
+        print("total sum:",sum_total)   
+        
+        
+ #left shift , right shift k times
+
+    def rotate(self,k,side):
+        if side == "right":
+            for i in range(0,k):
+                st1 = self.head
+                st2 = st1
+                while st1.next != None:
+                    st2 = st1
+                    st1 = st1.next
+                    
+                lnode = st1
+                l2.next = None
+                lnode.next = self.head
+                self.head = lnode
+                
+        if side == "left":
+            for i in range(0,k):
+                temp_node = self.head
+                self.head = self.head.next
+                temp_node.next = None
+                st = self.head
+                while st.next!= None:
+                    st = st.next
+                    
+                st.next = temp_node    
+
+        
+    
+    
+    
+    
+
+
+        
+        
+
+        
+
+
+
+        
+            
+#############TESTER CLASS################### 
+  
+#TASK 2.1 AND 2.2
+print("[task 2.1 and 2.2]")
+a = [10, 20, 30, 40, 50]
+l1 = MyList(a)
+l1.showList()  
+
+# TASK 2.3
+print("[task 2.3]")
+isListEmpty = l1.isEmpty()
+print(isListEmpty)  
+b = []
+l2 = MyList(b)
+isListEmpty = l2.isEmpty()
+print(isListEmpty)  
+
+# TASK 2.4
+print("[task 2.4]")
+print("before:")
+l1.showList()  
+l1.clear()
+print("after:")
+l1.showList()  
+
+#TASK 2.5
+print("[task 2.5]")
+c = [10, 20, 30, 40, 50, 65,75,85,95]
+l3 = MyList(c)
+l3.showList()  
+l3.insert(105)
+l3.showList()  
+l3.insert(0, 0)
+
+#TASK 2.6 
+print("[task 2.6]")
+l3.showList()  
+l3.insert(115, 5)
+l3.showList()  
+l3.insert(130, 12)
+l3.showList()  
+l3.insert(50) 
+
+
+#TASK 2.7
+print("[task 2.7]")
+l3.showList()  
+l3.remove(0)
+l3.showList()  
+l3.remove(85)
+l3.showList()  
+l3.remove(130)
+l3.showList()  
+l3.remove(111)  
+
+#task 3.1
+print("[task 3.1]")
+d = [1, 3,4,77,12,26]
+l4 = MyList(d)
+l5 = l4.to_find_even()
+l5.showList()  
+
+
+
+
+#task 3.2
+print("[task 3.2]")
+d = [1, 2, 5, 3, 8]
+l4 = MyList(d)
+found = l4.find(3)
+print(found)  
+found = l4.find(4)
+print(found)  
+
+
+ 
+    
+# Task-3.3 
+print("[task 3.3]")
+print("Reversing the following: ", end='')
+l4.showList()  
+l4.reverse_p_list()
+print("Reverse result: ", end='')
+l4.showList()  
+
+
+
+
+# Task 3.4
+print("[task 3.4]")
+print("Before Sort: ", end='')
+l4.showList()  
+l4.sort_function()
+print("After Sort: ", end='')
+l4.showList()  
+
+#task 3.5
+print("[task 3.5]")
+l4.showList()  
+total = l4.total_sum()
+#print(sum_total)
+
+
+
+#task 3.6
+print("[task 3.6]")
+l4.showList()  
+l4.rotate(2, "left")
+l4.showList()  
+l4.rotate(2, "right")
+l4.showList()  

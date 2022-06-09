@@ -1,0 +1,143 @@
+#sadaf m. anis
+
+
+#TASK 1 
+
+class KeyIndex:
+
+    def __init__ (self,a):
+        mini = a [0]
+        maxi  =a [0]
+
+        self.k = None
+
+        self.np = None
+
+        for i in a:
+
+            if i > maxi:
+                maxi = i
+
+            if i < mini and i < 0 :
+                mini = i
+
+        self.np = mini * (-1)
+
+        if self.np > 0:
+
+            if self.np > maxi:
+                maxi = self.np
+            
+            self.k = [0] * (maxi * 2+1)
+
+        else:
+            self.k = [0] * (maxi + 1)
+
+        for i in range(len(a)):
+            a[i] += self.np
+
+            count = a[i]
+            self.k[count] +=1
+
+
+
+    def search(self,val):
+        if self.k[val+self.np] >0:
+            print(f"{val} found")
+
+            return True
+
+        print(f"{val} not found")
+        return False
+
+    
+    def sorting(self):
+
+        total = 0
+        for i in range(len(self.k)):
+            for j in range(self.k[i]):
+                if self.k[i] != 0:
+                    total += 1
+
+        temp = [0] * total
+        temp2 = 0
+        
+        for i in range(len(self.k)):
+            if self.k[i] != 0:
+                for j in range (self.k[i]):
+                    temp[temp2] = i - self.np
+                    temp2 += 1
+
+        print(temp)
+
+
+array = [0, -1, -2, -3, -4, -5]
+obj1 = KeyIndex(array)
+print("value searching in the array - ")
+print(obj1.search(-5))
+print("sorted array")
+obj1.sorting()
+
+print("================")
+
+array2 = [4, -2, 3, -4, 7, 4]
+obj2 = KeyIndex(array2)
+print("value searching in the array - ")
+print(obj2.search(6))
+print("sorted array:")
+obj2.sorting()
+
+
+
+
+
+
+
+
+
+#TASK 2 hashing
+
+def hashTable(array):
+    alpha = " ABCDEFGHIJKLMNOPQRSTUVZXYZ "
+    digit =  " 0123456789 "
+    aux_arr = [None] * 9
+    size = 0
+
+
+    if size >len(aux_arr):
+        print("OVERFLOWED")
+        return
+
+    for i in array:
+
+        sum =0
+        count=0
+
+
+        for j in i:
+            if j in alpha and j not in "AEIOU":
+                count += 1
+
+            elif j in digit:
+                sum += int(j)
+
+        idx=((count *24)+sum)% 9
+
+        if aux_arr[idx] == None:
+            aux_arr[idx] = i
+            size += 1
+        else:
+
+            while aux_arr[idx] != None:
+                idx = (idx + 1) % len(aux_arr)
+
+            aux_arr[idx]=i
+            size += 1
+    print(aux_arr)
+
+
+print("Hashtab-")
+hash_array = ["WE65RT","IJUY54", "ST1E89B8A32", "IKA45U","109UYKU", "KKL55I","ST1E89B8A52"]
+hashTable(hash_array)
+
+

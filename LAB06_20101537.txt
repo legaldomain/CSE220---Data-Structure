@@ -1,0 +1,460 @@
+#TASK 1
+
+
+
+def rec_select_sort(arr,i = 0 ,j =1 ):
+
+    length = len(arr)
+    if i < length - 1 :#last index
+        min_idx = i
+        
+        if j < length :
+            
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+                
+            rec_select_sort(arr,i,j+1)
+            
+        #swapping
+        temp = arr [min_idx]
+        arr[min_idx] = arr[i]
+        arr[i] = temp
+        
+        rec_select_sort(arr,i+1,i+2)
+        
+    return arr 
+
+
+arr = [20, 7 , 6,13,-3,9,4]
+print(rec_select_sort(arr)) 
+
+
+############################################################################
+
+#TASK 2
+
+
+def rec_ins_sort(arr,i):
+    if i == len(arr):
+        return
+    else:
+        for k in range(i-1,-1,-1):
+            if arr[k] > arr[k+1]:
+                #swapping
+                temp = arr[k]
+                arr[k] = arr[k+1]
+                arr[k+1] = temp 
+            else:
+                break
+                
+    rec_ins_sort(arr, i + 1)
+
+    
+arr = [23, 8 , 6,17,-3,9,4]
+i = 0
+rec_select_sort(arr,i)
+print(arr)
+
+
+
+
+
+
+############################################################################
+
+
+
+#TASK 3
+
+
+class Node:
+    def __init__(self,ele,nxt):
+        self.element=ele
+        self.next=nxt
+        
+        
+class MyList:
+    def __init__(self,a):
+        self.head=None
+        restore=None
+        
+        for i in range (0,len(a)):
+            new = Node (a[i], None)
+            
+            if self.head == None:
+                self.head = new
+                restore = self.head
+            else:
+                restore.next = new
+                restore = new
+
+    def print(self):
+        if self.head == None:
+            print ("Array is empty")
+        else:
+            node = self.head
+            while node!= None:
+                print (node.element)
+                node = node.next
+                
+    def count_list(self,node):    
+        
+        if node is None:
+            return 0
+        else:
+            return 1+ (self.count_list(node.next))
+        
+        
+                
+    def bubble_sort(self):
+        node = self.head
+        length = self.count_list(node)
+        
+        
+        for i in range (length-1,-1,-1):
+            node = self.head
+            for k in range (0,i):
+                
+                if node.element > node.next.element:
+                    temp = node.element
+                    node.element = node.next.element
+                    node.next.element = temp
+                    print("==============")
+                    arr.print()
+                    
+                    
+                node = node.next
+                
+                
+        return self.head
+    
+    
+        
+    
+
+arr=[23, 8 , 6,17,-3,9,4]
+
+arr=MyList(arr)
+arr.bubble_sort()
+print("=============")
+print("final arr after bubble sort:")
+arr.print()
+
+
+
+
+
+
+
+
+############################################################################
+
+
+
+
+
+
+#TASK 4
+
+class Node:
+    def __init__(self,ele,nxt):
+        self.element=ele
+        self.next=nxt
+        
+        
+class MyList:
+    def __init__(self,a):
+        self.head=None
+        restore=None
+        
+        for i in range (0,len(a)):
+            new = Node (a[i], None)
+            
+            if self.head == None:
+                self.head = new
+                restore = self.head
+            else:
+                restore.next = new
+                restore = new
+
+    def print(self):
+        if self.head == None:
+            print ("Array is empty")
+        else:
+            node = self.head
+            while node!= None:
+                print (node.element)
+                node = node.next
+                
+    def countlist(self,node):    
+        
+        if node is None:
+            return 0
+        else:
+            return 1 + (self.countlist(node.next))
+        
+
+    def selection_sorting(self):
+        
+        node = self.head
+        count = self.countlist(node)
+        
+        for i in range (0,count,1):
+            
+            mini = node.element
+            j = i+1
+            node1 = node.next
+            while j <= count-1:
+                
+                if node1.element < mini:
+                    #swapping
+                    
+                    mini = node1.element
+                    temp = node.element
+                    node.element = node1.element
+                    node1.element = temp
+                    print("==============")
+                    arr.print()
+        
+                node1= node1.next
+                j += 1
+                
+            node = node.next
+arr=[29, 7 , 6,13,-3,11,4]
+arr=MyList(arr)
+arr.selection_sorting()
+print("=============")
+print("final arr after selection sort:")
+arr.print()
+
+
+
+
+
+
+############################################################################
+
+
+
+#TASK 5
+
+
+class Node:
+    
+    def __init__(self,ele):
+        
+        self.element = ele
+        
+        self.next = None
+        self.pre = None
+        
+        
+class DoublyList:
+    def __init__(self,one):
+        
+        self.head = Node (None)
+        self.head.next = self.head.pre = self.head
+        
+        node = self.head
+        
+        if type (one) == list:
+            
+            for i in one:
+                node = Node (i)
+                one = self.head
+                two = one.pre
+                
+                
+                node.next = one
+                node.pre = one.pre
+                one.pre = node
+                two.next= node
+                
+            
+    def showList(self):
+        node = self.head
+        node=node.next
+        
+        if node.next.element == None:
+            print("Array is empty")
+        else:
+            while True:
+                print(node.element)
+                
+                if node.next == self.head :
+                    break
+                    
+                node = node.next
+                
+    def count_list(self,node):        
+        if node.element is None:
+            return 0
+        else:
+            return 1+ self.count_list(node.next)
+        
+        
+                
+    def doubly_selection(self):
+        node=self.head
+        node=node.next
+        length=self.count_list(node)
+        node1=node
+        # print(length)
+        for i in range (0,length):
+            node1=node
+            for j in range( i-1, -1, -1 ):
+                
+                if node1.element == None:
+                    break
+                 #swap   
+                elif node1.element < node1.pre.element:
+                    
+                    temp=node1.element
+                    node1.element=node1.pre.element
+                    node1.pre.element=temp
+                    node1=node1.pre
+                    
+                else:
+                    break
+            node =node.next
+        return (self.head)
+
+
+list1=[34, 3 , 11,15,-2,10,5]
+
+list2 = DoublyList(list1)
+list2.showList()
+
+print("====final arr after doubly selection sort:====")
+
+list2.doubly_selection()
+list2.showList()
+
+
+
+############################################################################
+
+
+
+
+#TASK 6
+
+def bin_search(array, value, B , A=0):
+    
+    
+    if A <= B: 
+        Mid = (A + B) // 2
+        
+        if value ==array[Mid]:
+            return Mid
+
+        elif value > array [Mid]:
+            return bin_search(array, value , B , (Mid + 1))
+        else:
+            return bin_search(array, value,(Mid - 1), A)
+        
+    return  -1
+
+
+list = [2,3,4,5,6,7,8,9]
+k = len(list) - 1
+print (bin_search(list, 3, k))
+
+
+
+############################################################################
+
+
+
+
+#TASK 7 
+
+empty = {}
+def fibo(i):
+    
+    if i in empty:
+        return empty[i]
+    
+    elif i ==0:
+        return 0
+    
+    elif i == 1:
+        return 1
+    
+    else:
+        formula = fibo(i - 1) + fibo (i - 2)
+        empty [i] = formula
+        return formula
+    
+print(fibo(70))
+
+
+############################################################################
+
+#TESTER CLASS(all)
+
+#task 1
+arr = [20, 7 , 6,13,-3,9,4]
+print(rec_select_sort(arr)) 
+
+#task 2
+arr = [23, 8 , 6,17,-3,9,4]
+i = 0
+rec_select_sort(arr,i)
+print(arr)
+
+#task 3
+arr=[23, 8 , 6,17,-3,9,4]
+
+arr=MyList(arr)
+arr.bubble_sort()
+print("=============")
+print("final arr after bubble sort:")
+arr.print()
+
+#task 4
+arr=[29, 7 , 6,13,-3,11,4]
+arr=MyList(arr)
+arr.selection_sorting()
+print("=============")
+print("final arr after selection sort:")
+arr.print()
+
+#task 5
+list1=[34, 3 , 11,15,-2,10,5]
+
+list2 = DoublyList(list1)
+list2.showList()
+
+print("====final arr after doubly selection sort:====")
+
+list2.doubly_selection()
+list2.showList()
+
+#task 6
+list = [2,3,4,5,6,7,8,9]
+k = len(list)-1
+print(bin_search(list, 3, k))
+
+#task 7
+print(fibo(70))
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
